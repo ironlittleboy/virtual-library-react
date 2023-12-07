@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./register.css"
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const Register = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -10,17 +10,25 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   })
+  const [registros, setRegistros] = useState(
+    JSON.parse(localStorage.getItem('userData')) || []
+  );
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!formData.password !== formData.confirmPassword) {
-      toast.success("Register completed successfully")
-      navigate("/login")
-      return; 
-    } else {
-      toast.error("Passwords do not match")
-      return;
+
+    // Intenta obtener los usuarios actuales, asegurándote de que sea un array
+    let currentUsers = JSON.parse(localStorage.getItem("userData"));
+    if (!Array.isArray(currentUsers)) {
+      currentUsers = []; // Si no es un array, inicializa como un array vacío
     }
-  }
+
+    currentUsers.push(formData);
+    localStorage.setItem("userData", JSON.stringify(currentUsers));
+    toast.success("Te has registrado con éxito");
+    navigate("/login");
+  };
+
   const handleChange = (e) => {
     setFormData({
     ...formData,
@@ -28,11 +36,11 @@ const Register = () => {
     })
   }
   return (
-    <div>
+    <section>
       <div className="form-container">
         <form action="" onSubmit={handleSubmit}>
           <h1>Registrarse</h1>
-          <div>
+          <div className="input-field">
             <label htmlFor="">Nombres</label>
             <input
               type="text"
@@ -40,9 +48,10 @@ const Register = () => {
               placeholder="Nombre"
               required
               onChange={handleChange}
+              value={formData.name}
             />
           </div>
-          <div>
+          <div className="input-field">
             <label htmlFor="">Email</label>
             <input
               type="email"
@@ -50,9 +59,10 @@ const Register = () => {
               required
               placeholder="Email"
               onChange={handleChange}
+              value={formData.email}
             />
           </div>
-          <div>
+          <div className="input-field">
             <label htmlFor="">Contraseña</label>
             <input
               type="password"
@@ -60,23 +70,28 @@ const Register = () => {
               required
               placeholder="Contraseña"
               onChange={handleChange}
+              value={formData.password}
             />
           </div>
 
-          <div>
+          <div className="input-field">
             <label htmlFor="">Confirmar contraseña</label>
             <input
               type="password"
-              name="password2"
+              name="confirmPassword"
               placeholder="confirmar contraseña"
               required
               onChange={handleChange}
+              value={formData.confirmPassword}
             />
           </div>
           <button type="submit">Registrarse</button>
         </form>
+        Ya tienes una cuenta? <NavLink to={"/login"}>Inicia Sesion!</NavLink>
+        <br />
+        <NavLink to={"/"}>Inicio</NavLink>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -5,11 +5,17 @@ import BuscandoAlaska from "../../../public/bsucando_a_alaska_libro.jpg";
 import BajoMismaEstrella from "../../../public/bajo_la_misma_estrella_libro.jpg";
 import toast from "react-hot-toast";
 const Home = () => {
-  const isLoged = localStorage.getItem("isLoged");
-  const nuevos = false;
+  const isLoged = localStorage.getItem("isLogged");
+  const userBooks = JSON.parse(localStorage.getItem("userBook"));
+  const handleLogOut = () => {
+    toast.success("Cerraste sesion");
+    localStorage.removeItem("isLogged");
+    localStorage.removeItem("currentUser");
+    navigate("/");
+  };
   const handleClick = () => {
-    toast.error("Libro no disponible")
-  }
+    toast.error("Libro no disponible");
+  };
   const bookData = [
     {
       id: 1,
@@ -26,8 +32,8 @@ const Home = () => {
       description: "libro basado en ...",
       image: BajoMismaEstrella,
       handleClick: handleClick,
-    }
-  ]
+    },
+  ];
   return (
     <div>
       <header>
@@ -44,7 +50,9 @@ const Home = () => {
                   <NavLink to={"/profile"}>Mi Perfil</NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/login"}>Cerrar Sesion</NavLink>
+                  <NavLink to={"/login"} onClick={handleLogOut}>
+                    Cerrar Sesion
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -97,7 +105,7 @@ const Home = () => {
             </div>
             <div className="card">
               <img
-              onClick={handleClick}
+                onClick={handleClick}
                 src={BuscandoAlaska}
                 alt="libro image"
                 className="img-libro"
@@ -105,7 +113,7 @@ const Home = () => {
             </div>
             <div className="card">
               <img
-              onClick={handleClick}
+                onClick={handleClick}
                 src={BuscandoAlaska}
                 alt="libro image"
                 className="img-libro"
@@ -113,7 +121,7 @@ const Home = () => {
             </div>
             <div className="card">
               <img
-              onClick={handleClick}
+                onClick={handleClick}
                 src={BuscandoAlaska}
                 alt="libro image"
                 className="img-libro"
@@ -126,40 +134,56 @@ const Home = () => {
           <div className="saved-book-container">
             <h2>Libros Guardados</h2>
             <div className="saved-book">
-                {
-                  bookData.map((book) => {
-                    return (
-                      <div className="saved-book-card">
-                        <img
-                          onClick={book.handleClick}
-                          src={book.image}
-                          alt="libro image"
-                          className="img-libro"
-                        />
-                        <h3>{book.title}</h3>
-                        <p>{book.author}</p>
-                        <p>{book.description}</p>
-                      </div>
-                    )
-                  })
-                }
+              {bookData.map((book) => {
+                return (
+                  <div className="saved-book-card">
+                    <img
+                      onClick={book.handleClick}
+                      src={book.image}
+                      alt="libro image"
+                      className="img-libro"
+                    />
+                    <h3>{book.title}</h3>
+                    <p>{book.author}</p>
+                    <p>{book.description}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
         <div className="nuevos">
           <h1>Nuevas publicaciones</h1>
-          {
-           nuevos ? nuevos.map((nuevos) => console.log("si hay")) 
-           : 
-           <div className="cartota">
-            <h2>No hay nada que mostrar</h2>
-           </div>
-          } 
-        
+          {userBooks ? (
+             <table>
+             <thead>
+               <tr>
+                 <td>Nombre del libro</td>
+                 <td>Autor</td>
+                 <td>Descripcion</td>
+                 <td>Genero</td>
+               </tr>
+             </thead>
+             <tbody>
+               {userBooks.map((book) => (
+                 <tr key={book.id}>
+                   <td>{book.bookName}</td>
+                   <td>{book.autorBook}</td>
+                   <td>{book.descriptionBook}</td>
+                   <td>{book.genreBook}</td>
+                 </tr>
+               ))}
+             </tbody>
+           </table>
+          ) : (
+            <div className="cartota">
+              <h2>No hay nada que mostrar</h2>
+            </div>
+          )}
         </div>
       </main>
       <footer>
-      <h3>Biblioteca Virtual</h3>
+        <h3>Biblioteca Virtual</h3>
         <p>Todos los derechos reservados</p>
       </footer>
     </div>

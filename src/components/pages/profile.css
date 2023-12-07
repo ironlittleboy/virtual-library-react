@@ -1,0 +1,67 @@
+.profile-header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#default-user {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+.perfil-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 400px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-bold {
+  font-weight: bold;
+}
+
+.text-red {
+  color: rgb(255, 132, 132);
+}
+.message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 10px 30px ;
+  background-color: #ccc;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+table {
+  border-collapse: collapse;
+  border : 1px solid #ccc;
+}
+tr, th, td {
+  padding: 10px 20px;
+  text-align: left;
+
+}
+tbody {
+  font-weight: normal;
+}
+thead {
+  background-color: rgb(255, 132, 132);
+  color: white;
+  font-weight: bold;
+}
