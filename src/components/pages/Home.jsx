@@ -12,7 +12,6 @@ const Home = () => {
   const isLoged = localStorage.getItem("isLogged");
   const userBooks = JSON.parse(localStorage.getItem("userBook"));
 
-
   const handleLogOut = () => {
     toast.success("Cerraste sesion");
     localStorage.removeItem("isLogged");
@@ -159,33 +158,37 @@ const Home = () => {
           </div>
         </div>
         <div className="nuevos">
-          <h1>Nuevas publicaciones</h1>
-          {userBooks ? (
-            <table>
-              <thead>
-                <tr>
-                  <td>Nombre del libro</td>
-                  <td>Autor</td>
-                  <td>Descripcion</td>
-                  <td>Genero</td>
-                </tr>
-              </thead>
-              <tbody>
-                {userBooks.map((book) => (
-                  <tr key={book.id}>
-                    <td>{book.bookName}</td>
-                    <td>{book.autorBook}</td>
-                    <td>{book.descriptionBook}</td>
-                    <td>{book.genreBook}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <div className="cartota">
-              <h2>No hay nada que mostrar</h2>
-            </div>
-          )}
+          <h1>Tus publicaciones</h1>
+          {isLoged ? (
+            <>
+              {userBooks ? (
+                <table>
+                  <thead>
+                    <tr>
+                      <td>Nombre del libro</td>
+                      <td>Autor</td>
+                      <td>Descripcion</td>
+                      <td>Genero</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {userBooks.map((book) => (
+                      <tr key={book.id}>
+                        <td>{book.bookName}</td>
+                        <td>{book.autorBook}</td>
+                        <td>{book.descriptionBook}</td>
+                        <td>{book.genreBook}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="cartota">
+                  <h2>No hay nada que mostrar</h2>
+                </div>
+              )}
+            </>
+          ) : <h3>Inicia sesion para mirar</h3>}
         </div>
       </main>
       <footer>
