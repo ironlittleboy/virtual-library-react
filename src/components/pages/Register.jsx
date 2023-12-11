@@ -16,13 +16,24 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
     // Intenta obtener los usuarios actuales, asegurándote de que sea un array
     let currentUsers = JSON.parse(localStorage.getItem("userData"));
     if (!Array.isArray(currentUsers)) {
       currentUsers = []; // Si no es un array, inicializa como un array vacío
     }
-
+    if (!regex.test(formData.password)) {
+      toast.error("Contraseña no valida");
+      return;
+    }
+    if(formData.password !== formData.confirmPassword) {
+      toast.error("Contraseña no coinciden")
+      return;
+    }
+    if(formData.name.length <= 4 ) {
+      toast.error("Nombre de usuario no valido");
+      return;
+    }
     currentUsers.push(formData);
     localStorage.setItem("userData", JSON.stringify(currentUsers));
     toast.success("Te has registrado con éxito");
@@ -41,7 +52,7 @@ const Register = () => {
         <form action="" onSubmit={handleSubmit}>
           <h1>Registrarse</h1>
           <div className="input-field">
-            <label htmlFor="">Nombres</label>
+            <label htmlFor="">Nombre de usuario</label>
             <input
               type="text"
               name="name"

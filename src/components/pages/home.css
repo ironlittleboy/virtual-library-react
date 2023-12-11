@@ -24,6 +24,7 @@ a:hover {
 .main-presentation {
   background-image: url(../../../public/back.jpg);
   background-size: cover;
+  width: 100%;
   background-repeat: no-repeat;
   height: 80vh;
   display: flex;

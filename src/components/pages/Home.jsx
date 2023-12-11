@@ -3,10 +3,16 @@ import { NavLink } from "react-router-dom";
 import "./home.css";
 import BuscandoAlaska from "../../../public/bsucando_a_alaska_libro.jpg";
 import BajoMismaEstrella from "../../../public/bajo_la_misma_estrella_libro.jpg";
+import Teorema from "../../../public/el_teorema_katherine_libro.webp";
+import LibroC from "../../../public/lenguaje_c_libro.jpg";
+import Correr from "../../../public/correr_o_morir_libro.jpg";
 import toast from "react-hot-toast";
+
 const Home = () => {
   const isLoged = localStorage.getItem("isLogged");
   const userBooks = JSON.parse(localStorage.getItem("userBook"));
+
+
   const handleLogOut = () => {
     toast.success("Cerraste sesion");
     localStorage.removeItem("isLogged");
@@ -78,9 +84,9 @@ const Home = () => {
           <div className="text-container">
             <h2>Biblioteca Virtual de la ULEAM Imagen de fondo: The</h2>
             <p>
-              Stadtbibliothek Stuttgart The Stadtbibliothek Stuttgart (formerly
-              known as Stadtbücherei Stuttgart) is the public library of the
-              city of Stuttgart.
+              Imagen de fondo: The Stadtbibliothek Stuttgart The Stadtbibliothek
+              Stuttgart (formerly known as Stadtbücherei Stuttgart) is the
+              public library of the city of Stuttgart.
             </p>
           </div>
         </div>
@@ -98,7 +104,7 @@ const Home = () => {
             <div className="card">
               <img
                 onClick={handleClick}
-                src={BuscandoAlaska}
+                src={Teorema}
                 alt="libro image"
                 className="img-libro"
               />
@@ -106,7 +112,7 @@ const Home = () => {
             <div className="card">
               <img
                 onClick={handleClick}
-                src={BuscandoAlaska}
+                src={BajoMismaEstrella}
                 alt="libro image"
                 className="img-libro"
               />
@@ -114,7 +120,7 @@ const Home = () => {
             <div className="card">
               <img
                 onClick={handleClick}
-                src={BuscandoAlaska}
+                src={LibroC}
                 alt="libro image"
                 className="img-libro"
               />
@@ -122,7 +128,7 @@ const Home = () => {
             <div className="card">
               <img
                 onClick={handleClick}
-                src={BuscandoAlaska}
+                src={Correr}
                 alt="libro image"
                 className="img-libro"
               />
@@ -155,26 +161,26 @@ const Home = () => {
         <div className="nuevos">
           <h1>Nuevas publicaciones</h1>
           {userBooks ? (
-             <table>
-             <thead>
-               <tr>
-                 <td>Nombre del libro</td>
-                 <td>Autor</td>
-                 <td>Descripcion</td>
-                 <td>Genero</td>
-               </tr>
-             </thead>
-             <tbody>
-               {userBooks.map((book) => (
-                 <tr key={book.id}>
-                   <td>{book.bookName}</td>
-                   <td>{book.autorBook}</td>
-                   <td>{book.descriptionBook}</td>
-                   <td>{book.genreBook}</td>
-                 </tr>
-               ))}
-             </tbody>
-           </table>
+            <table>
+              <thead>
+                <tr>
+                  <td>Nombre del libro</td>
+                  <td>Autor</td>
+                  <td>Descripcion</td>
+                  <td>Genero</td>
+                </tr>
+              </thead>
+              <tbody>
+                {userBooks.map((book) => (
+                  <tr key={book.id}>
+                    <td>{book.bookName}</td>
+                    <td>{book.autorBook}</td>
+                    <td>{book.descriptionBook}</td>
+                    <td>{book.genreBook}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           ) : (
             <div className="cartota">
               <h2>No hay nada que mostrar</h2>

@@ -37,7 +37,7 @@ const Profile = () => {
           </div>
           <div>
             <div>
-              <span className="text-bold text-red">Nombres:</span>{" "}
+              <span className="text-bold text-red">Nombre de usuario:</span>{" "}
               <span>{userData.name}</span>
             </div>
             <div>
